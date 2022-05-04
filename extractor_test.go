@@ -10,7 +10,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/codeclysm/extract/v3"
+	"github.com/pdeslaur/extract/v3"
 	"github.com/stretchr/testify/require"
 )
 
