@@ -4,13 +4,14 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
 
-	"github.com/codeclysm/extract/v3"
+	"github.com/pdeslaur/extract/v3"
 	"github.com/stretchr/testify/require"
 )
 
@@ -139,4 +140,8 @@ func (m MockDisk) Symlink(oldname, newname string) error {
 func (m MockDisk) OpenFile(name string, flag int, perm os.FileMode) (*os.File, error) {
 	name = filepath.Join(m.Base, name)
 	return os.OpenFile(name, flag, perm)
+}
+
+func (m MockDisk) Reader(_ string, src io.Reader) io.Reader {
+	return src
 }

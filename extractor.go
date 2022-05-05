@@ -26,6 +26,7 @@ type Extractor struct {
 		MkdirAll(string, os.FileMode) error
 		OpenFile(name string, flag int, perm os.FileMode) (*os.File, error)
 		Symlink(string, string) error
+		Reader(path string, src io.Reader) io.Reader
 	}
 }
 
@@ -273,6 +274,7 @@ func (e *Extractor) Zip(ctx context.Context, body io.Reader, location string, re
 }
 
 func (e *Extractor) copy(ctx context.Context, path string, mode os.FileMode, src io.Reader) error {
+	src = e.FS.Reader(path, src)
 	// We add the execution permission to be able to create files inside it
 	err := e.FS.MkdirAll(filepath.Dir(path), mode|os.ModeDir|100)
 	if err != nil {

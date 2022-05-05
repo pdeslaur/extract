@@ -111,3 +111,7 @@ func (f fs) Symlink(oldname, newname string) error {
 func (f fs) OpenFile(name string, flag int, perm os.FileMode) (*os.File, error) {
 	return os.OpenFile(name, flag, perm)
 }
+
+func (f fs) Reader(_ string, src io.Reader) io.Reader {
+	return src
+}

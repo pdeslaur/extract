@@ -1,4 +1,4 @@
-module github.com/codeclysm/extract/v3
+module github.com/pdeslaur/extract/v3
 
 go 1.14
 

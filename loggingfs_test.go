@@ -2,6 +2,7 @@ package extract_test
 
 import (
 	"fmt"
+	"io"
 	"os"
 )
 
@@ -68,6 +69,10 @@ func (m *LoggingFS) OpenFile(name string, flags int, perm os.FileMode) (*os.File
 		Flags: flags,
 	})
 	return os.OpenFile(os.DevNull, flags, perm)
+}
+
+func (m *LoggingFS) Reader(_ string, src io.Reader) io.Reader {
+	return src
 }
 
 func (m *LoggingFS) String() string {
